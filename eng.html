@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoken English FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .faq {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .faq button {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            font-size: 16px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+        .faq button:hover {
+            background: #0056b3;
+        }
+        .faq .answer {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Frequently Asked Spoken English Questions</h2>
+        <div id="faq-container"></div>
+    </div>
+
+    <script>
+        const faqs = [
+            { question: "Tell me about yourself.", answer: "I am a final year MCA student, passionate about software engineering and AI." },
+            { question: "Why do you want to work with us?", answer: "I admire your company's innovation and believe my skills align with your goals." },
+            { question: "What are your strengths?", answer: "I am a quick learner, dedicated, and have a problem-solving mindset." },
+            { question: "What are your weaknesses?", answer: "Sometimes I overanalyze situations, but I am learning to manage my time effectively." }
+            // এখানে আরও ১০০ প্রশ্ন যোগ করবো
+        ];
+
+        const faqContainer = document.getElementById("faq-container");
+
+        faqs.forEach((faq, index) => {
+            const faqDiv = document.createElement("div");
+            faqDiv.classList.add("faq");
+
+            const questionButton = document.createElement("button");
+            questionButton.innerText = `${index + 1}. ${faq.question}`;
+            questionButton.onclick = () => {
+                const answerDiv = faqDiv.querySelector(".answer");
+                answerDiv.style.display = answerDiv.style.display === "block" ? "none" : "block";
+            };
+
+            const answerDiv = document.createElement("div");
+            answerDiv.classList.add("answer");
+            answerDiv.innerText = faq.answer;
+
+            faqDiv.appendChild(questionButton);
+            faqDiv.appendChild(answerDiv);
+            faqContainer.appendChild(faqDiv);
+        });
+    </script>
+</body>
+</html>

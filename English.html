@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Style FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+        }
+        h2 {
+            font-size: 28px;
+        }
+        .faq {
+            background: #303030;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .faq .question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background: #303030;
+            color: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            outline: none;
+        }
+        .faq .question:hover {
+            background: #505050;
+        }
+        .faq .answer {
+            display: none;
+            background: #181818;
+            padding: 15px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .faq.active .answer {
+            display: block;
+        }
+        .plus {
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .faq.active .plus {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Frequently Asked Spoken English Questions</h2>
+
+        <div class="faq">
+            <button class="question">Tell me about yourself. <span class="plus">+</span></button>
+            <div class="answer">I am a final-year MCA student passionate about software development.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">Why do you want to work with us? <span class="plus">+</span></button>
+            <div class="answer">I admire your company's innovation and culture.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">What are your strengths? <span class="plus">+</span></button>
+            <div class="answer">I am hardworking, a quick learner, and good at problem-solving.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">What are your weaknesses? <span class="plus">+</span></button>
+            <div class="answer">Sometimes I overthink things, but I am working on improving.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">Where do you see yourself in 5 years? <span class="plus">+</span></button>
+            <div class="answer">I see myself as a skilled software engineer, contributing to meaningful projects.</div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".question").forEach(button => {
+            button.addEventListener("click", () => {
+                const faq = button.parentElement;
+                document.querySelectorAll(".faq").forEach(item => {
+                    if (item !== faq) {
+                        item.classList.remove("active");
+                    }
+                });
+                faq.classList.toggle("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

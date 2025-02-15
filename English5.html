@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Style FAQ with Advanced Features</title>
+    <style>
+        /* Background & General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?cinema,dark') no-repeat center center/cover;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.5s ease-in-out;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 28px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Search Box */
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            text-align: center;
+            background: #222;
+            color: white;
+        }
+
+        /* Expand/Collapse Buttons */
+        .faq-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .faq-controls button {
+            background: #ff0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* FAQ Styling */
+        .faq {
+            background: #303030;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: 0.3s ease-in-out;
+        }
+        .faq .question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background: #303030;
+            color: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            outline: none;
+            transition: background 0.3s;
+        }
+        .faq .question:hover {
+            background: #ff0000;
+        }
+        .faq .answer {
+            max-height: 0;
+            overflow: hidden;
+            background: #181818;
+            padding: 0 15px;
+            font-size: 16px;
+            text-align: left;
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+        }
+        .faq.active .answer {
+            max-height: 300px;
+            padding: 15px;
+        }
+        .plus {
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .faq.active .plus {
+            transform: rotate(45deg);
+        }
+        
+        /* Dark Mode */
+        .dark-mode {
+            background: #fff;
+            color: #000;
+        }
+        .dark-mode .container {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .dark-mode .faq {
+            background: #ddd;
+            color: black;
+        }
+        .dark-mode .faq .question {
+            background: #ddd;
+            color: black;
+        }
+        .dark-mode .faq .answer {
+            background: #f5f5f5;
+        }
+        .dark-mode .search-box {
+            background: #ccc;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle">🌗 Toggle Mode</button>
+
+    <div class="container">
+        <h2>🎤 Frequently Asked Spoken English Questions</h2>
+        <input type="text" id="search" class="search-box" placeholder="🔍 Search for a question...">
+        
+        <div class="faq-controls">
+            <button id="expandAll">Expand All</button>
+            <button id="collapseAll">Collapse All</button>
+        </div>
+
+        <div class="faq">
+            <button class="question">Tell me about yourself. <span class="plus">+</span></button>
+            <div class="answer">I am a final-year MCA student passionate about software development.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">Why do you want to work with us? <span class="plus">+</span></button>
+            <div class="answer">I admire your company's innovation and culture.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">What are your strengths? <span class="plus">+</span></button>
+            <div class="answer">I am hardworking, a quick learner, and good at problem-solving.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">What are your weaknesses? <span class="plus">+</span></button>
+            <div class="answer">Sometimes I overthink things, but I am working on improving.</div>
+        </div>
+
+        <div class="faq">
+            <button class="question">Where do you see yourself in 5 years? <span class="plus">+</span></button>
+            <div class="answer">I see myself as a skilled software engineer, contributing to meaningful projects.</div>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Toggle Function
+        document.querySelectorAll(".question").forEach(button => {
+            button.addEventListener("click", () => {
+                const faq = button.parentElement;
+                faq.classList.toggle("active");
+            });
+        });
+
+        // Search Function
+        document.getElementById("search").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let faqs = document.querySelectorAll(".faq");
+
+            faqs.forEach(faq => {
+                let questionText = faq.querySelector(".question").innerText.toLowerCase();
+                if (questionText.includes(filter)) {
+                    faq.style.display = "block";
+                } else {
+                    faq.style.display = "none";
+                }
+            });
+        });
+
+        // Expand/Collapse All
+        document.getElementById("expandAll").addEventListener("click", () => {
+            document.querySelectorAll(".faq").forEach(faq => faq.classList.add("active"));
+        });
+        document.getElementById("collapseAll").addEventListener("click", () => {
+            document.querySelectorAll(".faq").forEach(faq => faq.classList.remove("active"));
+        });
+
+        // Theme Toggle
+        document.querySelector(".theme-toggle").addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+        });
+
+    </script>
+
+</body>
+</html>
